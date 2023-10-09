@@ -2,8 +2,7 @@ package HybridTestIngFramework.AutomationTesting.stepDefinition;
 
 import static org.testng.Assert.assertTrue;
 
-import java.io.IOException;
-import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,6 +14,9 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import java.io.IOException;
+import java.time.Duration;
 
 public class CommonSteps {
 

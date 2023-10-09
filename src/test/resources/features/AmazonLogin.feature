@@ -7,6 +7,6 @@ Feature: Login page feature
     Then user is on login page
 
   Scenario: Login page title
-    Given user is on login page
+    When user is on login page
     #When user gets the title of the page
     Then page title should be "Amazon.in"
