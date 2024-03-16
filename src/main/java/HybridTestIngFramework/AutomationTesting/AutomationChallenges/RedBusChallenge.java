@@ -37,21 +37,21 @@ public class RedBusChallenge {
         while (!month.contains(expectedMonth));
         driver.findElement(By.cssSelector("div[class*='DayNavigator__IconBlock']:nth-child(1)")).click();
 
-        ArrayList<String> weekendDate = new ArrayList<>();
+        ArrayList<String> weekendDateList = new ArrayList<>();
 
         try {
             System.out.println(reqMonth);
 
-            List<WebElement> sat = driver.findElements(By.cssSelector("span[class*='bwoYtA']"));
+            List<WebElement> weekendDates = driver.findElements(By.cssSelector("span[class*='bwoYtA']"));
 
-            for (WebElement satweek : sat) {
-                if (!satweek.getText().isEmpty()) {
-                    weekendDate.add(satweek.getText());
+            for (WebElement wDate : weekendDates) {
+                if (!wDate.getText().isEmpty()) {
+                    weekendDateList.add(wDate.getText());
                 }
             }
         } catch (NoSuchElementException e) {
             e.printStackTrace();
         }
-        return weekendDate;
+        return weekendDateList;
     }
 }
