@@ -26,21 +26,18 @@
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
 			<version>${cucumber.version}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit</artifactId>
 			<version>${cucumber.version}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -49,30 +46,53 @@
 			<version>4.11.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>5.3.0</version>
+		</dependency>
 		<dependency>
 			<groupId>io.github.bonigarcia</groupId>
 			<artifactId>webdrivermanager</artifactId>
 			<version>4.2.2</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.awaitility/awaitility -->
+		<dependency>
+			<groupId>org.awaitility</groupId>
+			<artifactId>awaitility</artifactId>
+			<version>4.2.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+		<dependency>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>8.5.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>tech.grasshopper</groupId>
 			<artifactId>extentreports-cucumber7-adapter</artifactId>
-			<version>1.14.0</version>
+			<version>1.10.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.14.3</version>
-			<scope>test</scope>
+
 		</dependency>
 
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-testng</artifactId>
 			<version>${cucumber.version}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
@@ -107,13 +127,45 @@
 				<version>${maven.surefire.version}</version>
 				<configuration>
 					<includes>
-						<include></include>
+						<include>**/RunCucumberTest.java</include>
 					</includes>
 					<parallel>methods</parallel>
 					<threadCount>4</threadCount>
 					<useUnlimitedThreads>false</useUnlimitedThreads>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>3.0.0-M3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+						</goals>
+						<configuration>
+<!--							<excludes>-->
+<!--								<exclude>**/*IT*.java</exclude>-->
+<!--							</excludes>-->
+<!--							<includes>UNCOMMENT BELOW LINE-->
+<!--								- To execute feature files with a single runner-->
+<!--								<include>**/MyTestRunner.java</include>-->
+<!--								UNCOMMENT BELOW LINE - To execute feature files with multiple runners-->
+<!--								<include>**/*Runner.java</include>-->
+<!--							</includes>-->
+							 <parallel>methods</parallel>
+							<threadCount>4</threadCount>
+							<perCoreThreadCount>true</perCoreThreadCount>
+<!--							UNCOMMENT BELOW 3 LINES - To execute using forking or combination option-->
+<!--							<forkCount>2</forkCount>-->
+<!--							<reuseForks>true</reuseForks>-->
+<!--							<reportsDirectory>${project.build.directory}/failsafe-reports_${surefire.forkNumber}-->
+<!--							</reportsDirectory>-->
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 
