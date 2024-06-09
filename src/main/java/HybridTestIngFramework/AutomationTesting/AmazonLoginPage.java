@@ -1,13 +1,14 @@
 package HybridTestIngFramework.AutomationTesting;
 
-import java.io.IOException;
-
+import Utils.PropertiesReader;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
-import Utils.PropertiesReader;
+import java.io.IOException;
 
 public class AmazonLoginPage {
 
@@ -61,5 +62,25 @@ public class AmazonLoginPage {
 		getSubmitBtn().click();
 		return new AmazonHomePage(driver);
 	}
-
+	public void loginToAmazonWithInvalidCredentials(String username) throws IOException, InterruptedException {
+		getSignInText().click();
+		getUserNameTxtBox().sendKeys(username);
+		getContinueBtn().click();
+		Thread.sleep(4000);
+		Assert.assertTrue(driver.findElement(By.xpath("//span[contains(text(),'We cannot find an account with that email address')]")).isDisplayed(),"Test failed");
+		getUserNameTxtBox().clear();
+		driver.navigate().back();
+		driver.navigate().back();
+		Thread.sleep(4000);
+	}
+	public boolean verifyUserNotInHomePage() {
+		try {
+			if(!driver.findElement(By.xpath("//span[contains(text(),'Hello, Rameswar')]")).isDisplayed()){
+			  return true;
+			}
+		} catch (Exception e) {
+			return true;
+		}
+		return false;
+	}
 }
